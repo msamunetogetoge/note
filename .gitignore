@@ -1,6 +1,5 @@
 .vscode
 __pycache__
-.env
 app/__pycache__
 new_project/__pycache__
 
