@@ -1,0 +1,20 @@
+{% extends "flights/layout.html" %}
+
+{% block body %}
+
+<h1>Form with model </h1>
+<h2>ModelForm</h2>
+<ul>
+    <form action ="{% url 'flights:with_model' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_ul }}
+        <input type="submit">
+    </form>
+</ul>
+{% if airport %}
+    <h2>input </h2>
+    <div>
+       {{airport}}
+    </div>
+{% endif %}
+{% endblock %}
