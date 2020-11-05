@@ -41,7 +41,26 @@ def make_NN(request):
         return HttpResponseRedirect(reverse("empty"))
 
 def select_data(request):
-    return render(request, "app/select_data.html")
+    """
+    POSTされたデータがcsvか判定し、calculation に渡す
+    """
+    if request.method =="POST":
+        form          = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            #data is save to /media
+            form.save()
+            return HttpResponseRedirect(reverse("calculation"))
+        else:   
+            dataform      = UploadFileForm        
+            return render(request, "app/select_data.html",{
+                "msg" : form.errors["data"],
+                "form": dataform
+            })
+    else:
+        dataform      = UploadFileForm
+        return render(request, "app/select_data.html",{
+                "form":dataform,
+                })
     
 def calculation(request):
     return render(request, "app/calculation.html")
@@ -54,4 +73,4 @@ def help(request):
     return render(request, "app/help.html")
 
 def empty(request):
-    return render(request,"tech/empty.html" )
+    return render(request,"app/empty.html" )
