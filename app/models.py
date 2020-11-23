@@ -29,8 +29,8 @@ class NN_layers(models.Model):
 
 
 class selectedData(models.Model):
-    data        = models.FileField(upload_to="media",null=True, 
-                  validators=[FileExtensionValidator(".csv", "csvファイル以外は使えません。")])
+    data        = models.FileField(upload_to="media",
+                  validators=[FileExtensionValidator(allowed_extensions=["csv","Microsoft Excel CSV ファイル"],message="csvファイルしか使えません。" )])
 
     def __str__(self):
         return self.title

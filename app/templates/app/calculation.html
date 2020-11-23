@@ -1,4 +1,5 @@
 {% extends "app/layout.html" %}
+{%  load filename %}
 
 {% block landing-page-title %}
 MML Calculator
@@ -23,6 +24,28 @@ MML Calculator
 {% endblock %}
 
 {% block contents %}
-使うデータとモデルを確認して計算を実行させるコンテンツ
+<div>
+<ul> 
+    <li>使うデータ: {{data | getfilename  }}</li>
+    <li>使う手法: {{model.mdl }}</li>
+</ul>
+</div>
+<div >
+    <table class="table">
+        <tr>
+            <td>
+            <form action ="{% url 'calculation'  %}"   method="post" >
+                {% csrf_token %}
+                <input class="btn btn-primary" type="submit" value="計算"></input>
+            </form>
+            </td>
+            <td>
+            <form action="{% url 'datas' %}">
+                <input class="btn btn-success" type="submit" value="戻る"></input>
+            </form>
+            </td>
+        </tr>
+    </table>
+</div>
 
 {% endblock %}
